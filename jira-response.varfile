@@ -1,0 +1,15 @@
+# install4j response file for JIRA Software
+# Normally found as ${JIRA_INSTALL}/.install4j/response.varfile
+
+launch.application$Boolean=true
+rmiPort$Long=8005
+app.jiraHome=/var/atlassian/application-data/jira
+app.install.service$Boolean=true
+# existingInstallationDir=/usr/local/JIRA Software
+sys.confirmedUpdateInstallationString=false
+sys.languageId=en
+sys.installationDir=/opt/atlassian/jira
+executeLauncherAction$Boolean=true
+httpPort$Long=8080
+portChoice=default
+

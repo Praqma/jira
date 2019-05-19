@@ -1,0 +1,24 @@
+## This is a minimal example. 
+## It will use your current kube context and will deploy Tiller without RBAC service account.
+## For the full config spec and options, check https://github.com/Praqma/helmsman/blob/master/docs/desired_state_specification.md 
+
+namespaces:
+  jira
+
+helmRepos:
+  praqma: https://kubernetes-charts.storage.googleapis.com
+
+apps:
+  jira:
+    namespace: jira
+    enabled: true
+    chart: praqma/jira
+    version: 0.4.3
+    valuesFile: jira-vaules.yaml
+  
+  jira-postgres:
+    namespace: jira
+    enabled: true
+    chart: stable/postgresql
+    version: 0.15.1
+    valuesFile: jira-postgres-values.yaml

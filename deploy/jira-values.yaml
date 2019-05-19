@@ -1,0 +1,150 @@
+Replicas: 2
+ContainerName: jira
+
+RBAC:
+  Enabled: true
+
+Datacenter:
+  Enabled: true
+
+# to add certs inside the docker container
+Certs:
+  Enabled: false
+  # The secret below must be created in advance to contain all your certs
+  # It will be mounted to the path you specify below inside the container
+  # to create the secret, you can use the following command:
+  # kubectl create secret generic my-top-secret --from-file=path/to/certs/dir --namespace my-ns
+  # SecretName: my-top-secret
+  # MountPath: /var/atlassian/certs/
+
+Image:
+  Name: "praqma/jira-server"
+  Tag: "8.1.0"
+  ImagePullPolicy: "IfNotPresent"
+  PrivateRegistry: true
+  PullSecret: "docker-hub-credentials"
+
+ContainerPort: 8080
+TerminationGracePeriodSeconds: 50
+
+EnvVars:
+  X_PROXY_NAME: "jira.example.com"
+  X_PROXY_PORT: "80"
+  X_PROXY_SCHEME: "http"
+  X_CONTEXT_PATH: ""
+  ADDITIONAL_CONNECTOR: "false"
+  JAVA_OPTS: ""
+  CATALINA_OPTS: "-Dfile.encoding=UTF-8 -Xms1024m -Xmx1024m"
+  
+# livenessProbe:
+#   Path:
+#   Port:
+ReadinessProbe:
+  Path: /status
+  Port: jira-main
+  SuccessThreshold: 1
+  PeriodSeconds: 10
+
+Resources:
+  cpuRequest: 1500m
+  cpuLimit: 3000m
+  memoryRequest: 2048Mi
+  memoryLimit: 4096Mi
+
+SecurityContext: 1000
+
+Persistence:
+   # define volume claim template.
+   VolumeClaimTemplates:
+     AccessModes: ReadWriteOnce
+     Storage: 5Gi
+     StorageClassName: 
+     Selector:
+       Enabled: true
+       MatchLabels:
+         app: jira
+         system: production
+         type: homefolder
+
+   # datacenter volume -- Needs Datacenter.Enabled to be set to true or else it would be ignored.
+   DatacenterExistingClaimName: ""
+   DatacenterMountPath: /var/atlassian/jira-datacenter/
+   DatacenterVolumeClaimTemplates:
+     AccessModes: ReadWriteMany
+     Storage: 5Gi
+     StorageClassName: 
+     Selector:
+       Enabled: true
+       MatchLabels:
+         app: jira
+         system: production
+         type: datacenter
+
+PodDisruption:
+  Enabled: false
+  MinAvailable: 1
+
+Service:
+  Type: ClusterIP
+  Port: 8080
+  Protocol: TCP
+  # Annotations:
+  #   traefik.backend.loadbalancer.sticky: "true"
+
+Ingress:
+  Enabled: true
+  Host: jira.example.com
+  ServicePort: 8080
+
+# to add promethues annotations
+PrometheusMetrics:
+  Enabled: true
+  Path: /plugins/servlet/prometheus/metrics
+
+# list of plugins (plugin IDs) to be pre-installed
+Plugins: []
+  # - ru.andreymarkelov.atlas.plugins.prom-confluence-exporter
+
+## Node labels for pod assignment
+## ref: https://kubernetes.io/docs/user-guide/node-selection/
+#
+nodeSelector: {}
+  # Don't forget to remove the brackets above if you want to use a selector.
+  # disktype: ssd
+  # size: large
+
+## Tolerations for pod assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+##
+tolerations: []
+# Don't forget to remove the brackets above if you want to use tolerations.
+# - key: "key"
+#   operator: "Equal"
+#   value: "value"
+#   effect: "NoSchedule"
+
+## Affinity for pod assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+##
+affinity: {}
+  # Don't forget to remove the brackets above if you want to use affinity.
+  # podAffinity:
+  #     requiredDuringSchedulingIgnoredDuringExecution:
+  #     - labelSelector:
+  #         matchExpressions:
+  #         - key: security
+  #           operator: In
+  #           values:
+  #           - S1
+  #       topologyKey: failure-domain.beta.kubernetes.io/zone
+  #   podAntiAffinity:
+  #     preferredDuringSchedulingIgnoredDuringExecution:
+  #     - weight: 100
+  #       podAffinityTerm:
+  #         labelSelector:
+  #           matchExpressions:
+  #           - key: security
+  #             operator: In
+  #             values:
+  #             - S2
+  #         topologyKey: kubernetes.io/hostname
