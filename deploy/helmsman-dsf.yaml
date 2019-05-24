@@ -14,7 +14,7 @@ apps:
     enabled: true
     chart: praqma/jira
     version: 0.4.3
-    valuesFile: jira-vaules.yaml
+    valuesFile: jira-values.yaml
   
   jira-postgres:
     namespace: jira
