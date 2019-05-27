@@ -10,7 +10,7 @@ The source-code in this repository is released under MIT License, but the actual
 
 ## Main features
 - Uses Fedora 29 as base image.
-- Uses Atlassian Confluence binary installer, which comes with built-in Oracle JDK - Adopt JDK/JRE in the newer installers.
+- Uses Atlassian Jira binary installer, which comes with built-in Oracle JDK - Adopt JDK/JRE in the newer installers.
 - Exposes port 8080
 - Supports data center mode and self signed certs.
 - Can be setup behind a reverse proxy by setting up certain proxy related environment variables as mentioned below.
