@@ -1,5 +1,7 @@
 # Atlassian Software in Kubernetes (ASK) - Jira
 
+![ASK-Logo](images/ask-logo.png)
+
 This respository is a component of **[ASK](https://www.praqma.com/products/ask/) Atlassian Software in Kubernetes** ; and holds program-code to create Docker image for Jira Software (not Jira Core). 
 
 Although the title says "Atlassian Software in Kubernetes", the container image can be run on plain Docker/Docker-Compose/Docker-Swarm, etc. 
