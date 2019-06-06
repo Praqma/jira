@@ -130,11 +130,19 @@ The following environment variables can be set when building your docker image.
 | X_PROXY_SCHEME | The scheme used by the public facing proxy - normally https. | `https` |
 | X_CONTEXT_PATH | The context path, if any. Best to leave blank. (This was formerly X_PATH. ) | |
 
+
 ## Get newest version from Atlassian
 
 You can use Curl and jq to get the latest version og download link for the installed used in this repository. It makes it easy when you need to build a newer image.
 ```
 curl -s https://my.atlassian.com/download/feeds/current/jira-software.json | sed 's\downloads(\\' | sed s'/.$//' | jq -r '.[] | select(.platform=="Unix") | "Url:" + .zipUrl, "Version:" + .version, "Edition:" + .edition'
+```
+Output :
+```
+Url:https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-8.2.1-x64.bin
+Version:8.2.1
+Edition:Standard
+
 ```
 
 ## Linter
