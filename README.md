@@ -12,7 +12,7 @@ The source-code in this repository is released under MIT License, but the actual
 
 ## Main features
 - Uses Fedora 29 as base image.
-- Uses Atlassian Jira binary installer, which comes with built-in Oracle JDK - Adopt JDK/JRE in the newer installers.
+- Uses Atlassian Jira binary installer, which comes with Adopt JDK/JRE in the newer installers.
 - Exposes port 8080
 - Supports data center mode and self signed certs.
 - Can be setup behind a reverse proxy by setting up certain proxy related environment variables as mentioned below.
@@ -115,7 +115,7 @@ The following environment variables can be set when building your docker image.
 
 | Env name | Description                                                                                                                                                                                                                                                                                                      	| Defaults                        	|
 |------------------------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|---------------------------------	|
-| JIRA_VERSION                 	| The version number which is part of the name of the jira software bin/tarball/zip.                                                                                                                                                                                                                               	| 8.1.0                          	|
+| JIRA_VERSION                 	| The version number which is part of the name of the jira software bin/tarball/zip.                                                                                                                                                                                                                               	| 8.3.2                          	|
 | DATACENTER_MODE              	| This needs to be set to 'true' if you want to setup Jira in a data-center mode. Need different lincense for this                                                                                                                                                                                                 	| false                           	|
 | JIRA_DATACENTER_SHARE        	| It needs to be a shared location, which multiple jira instances can write to. This location will most probably be an NFS share, and should exist on the file system.  If it does not exist, then it will be created and chown to the jira OS user.  NB: For this to work, DATACENTER_MODE should be set to true. 	| /var/atlassian/jira-datacenter  	|
 | TZ_FILE                      	| Timezone. Set the path of the correct zone you want to use for your container. Can be set at runtime as well                                                                                                                                                                                                     	| /usr/share/zoneinfo/Europe/Oslo 	|
@@ -139,8 +139,8 @@ curl -s https://my.atlassian.com/download/feeds/current/jira-software.json | sed
 ```
 Output :
 ```
-Url:https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-8.2.1-x64.bin
-Version:8.2.1
+Url:https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-8.3.2-x64.bin
+Version:8.3.2
 Edition:Standard
 
 ```

@@ -26,28 +26,13 @@ LABEL maintainer="kaz@praqma.net heh@praqma.net"
 # JIRA_VERSION:
 # ------------
 # The value for JIRA_VERSION should be a version number, which is part of the name of the jira software bin/tarball/zip.
-ENV JIRA_VERSION=8.2.1
+ENV JIRA_VERSION=8.3.2
 
 
 # JIRA_DOWNLOAD_URL:
 # -----------------
 # User does not need to modify this ENV variable unless absolutely necessary.
 ENV JIRA_DOWNLOAD_URL https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-${JIRA_VERSION}-x64.bin 
-
-
-# ADOPT_JRE_VERSION:
-# -----------------
-# The ADOPT_JRE's "version" is the string between "hotspot_" and ".tar.gz" in the URL.
-# This must be correct as it is used to download the correct file from AdoptOpenJDK (github) website.
-ENV ADOPT_JRE_VERSION=8u212b03
-
-
-# ADOPT_JRE_DOWNLOAD_URL:
-# ----------------------
-# Becasue of the silly naming scheme, it is very difficult to find a proper pattern for a file to download.
-# That's why we have to use a full URL
-# User does not need to modify this ENV variable unless absolutely necessary.
-ENV ADOPT_JRE_DOWNLOAD_URL=https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u212-b03/OpenJDK8U-jre_x64_linux_hotspot_${ADOPT_JRE_VERSION}.tar.gz
 
 
 # OS_USERNAME:
@@ -217,18 +202,9 @@ RUN echo -e "LANG=\"en_US.UTF-8\" \n LC_ALL=\"en_US.UTF-8\"" >/etc/sysconfig/i18
   && ln -sf ${TZ_FILE} /etc/localtime \
   && echo "Downloading Jira from: ${JIRA_DOWNLOAD_URL}" && curl -# -L -O ${JIRA_DOWNLOAD_URL}  && echo \
   && sync \ 
-  && echo "Downloading AdoptOpenJRE from: ${ADOPT_JRE_DOWNLOAD_URL}" && curl -# -L -O ${ADOPT_JRE_DOWNLOAD_URL} \
-  && sync \
   && chmod +x ./atlassian-jira-software-${JIRA_VERSION}-x64.bin \
   && sync \
   && ./atlassian-jira-software-${JIRA_VERSION}-x64.bin -q -varfile /tmp/jira-response.varfile \
-  && sync \
-  &&   JRE_TARBALL=$(basename ${ADOPT_JRE_DOWNLOAD_URL}) \
-  &&   TEMP_DIR=$(mktemp -d) \
-  &&   tar xzf ${JRE_TARBALL} -C ${TEMP_DIR}/ \
-  &&   JRE_DIR=$(find  ${TEMP_DIR}  -maxdepth 1 -name "*-jre" -type d) \
-  &&   rm -fr ${JAVA_HOME}/* \
-  &&   cp -r ${JRE_DIR}/* ${JAVA_HOME}/ \
   && sync \ 
   && echo "Jira version: ${JIRA_VERSION}" > ${JIRA_INSTALL}/atlassian-version.txt \
   && ${JIRA_INSTALL}/jre/bin/java \
