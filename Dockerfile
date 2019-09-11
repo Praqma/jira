@@ -206,6 +206,8 @@ RUN echo -e "LANG=\"en_US.UTF-8\" \n LC_ALL=\"en_US.UTF-8\"" >/etc/sysconfig/i18
   && sync \
   && ./atlassian-jira-software-${JIRA_VERSION}-x64.bin -q -varfile /tmp/jira-response.varfile \
   && sync \ 
+  && rm -f                   "${JIRA_INSTALL}/lib/postgresql-9*" \
+  && curl -Ls                "https://jdbc.postgresql.org/download/postgresql-42.2.1.jar" -o "${JIRA_INSTALL}/lib/postgresql-42.2.1.jar" \
   && echo "Jira version: ${JIRA_VERSION}" > ${JIRA_INSTALL}/atlassian-version.txt \
   && ${JIRA_INSTALL}/jre/bin/java \
        -classpath ${JIRA_INSTALL}/lib/catalina.jar \
