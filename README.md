@@ -115,7 +115,7 @@ The following environment variables can be set when building your docker image.
 
 | Env name | Description                                                                                                                                                                                                                                                                                                      	| Defaults                        	|
 |------------------------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|---------------------------------	|
-| JIRA_VERSION                 	| The version number which is part of the name of the jira software bin/tarball/zip.                                                                                                                                                                                                                               	| 8.3.2                          	|
+| JIRA_VERSION                 	| The version number which is part of the name of the jira software bin/tarball/zip.                                                                                                                                                                                                                               	| 8.4.0                          	|
 | DATACENTER_MODE              	| This needs to be set to 'true' if you want to setup Jira in a data-center mode. Need different lincense for this                                                                                                                                                                                                 	| false                           	|
 | JIRA_DATACENTER_SHARE        	| It needs to be a shared location, which multiple jira instances can write to. This location will most probably be an NFS share, and should exist on the file system.  If it does not exist, then it will be created and chown to the jira OS user.  NB: For this to work, DATACENTER_MODE should be set to true. 	| /var/atlassian/jira-datacenter  	|
 | TZ_FILE                      	| Timezone. Set the path of the correct zone you want to use for your container. Can be set at runtime as well                                                                                                                                                                                                     	| /usr/share/zoneinfo/Europe/Oslo 	|
@@ -139,8 +139,8 @@ curl -s https://my.atlassian.com/download/feeds/current/jira-software.json | sed
 ```
 Output :
 ```
-Url:https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-8.3.2-x64.bin
-Version:8.3.2
+Url:https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-8.4.0-x64.bin
+Version:8.4.0
 Edition:Standard
 
 ```
