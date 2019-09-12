@@ -26,7 +26,7 @@ LABEL maintainer="kaz@praqma.net heh@praqma.net"
 # JIRA_VERSION:
 # ------------
 # The value for JIRA_VERSION should be a version number, which is part of the name of the jira software bin/tarball/zip.
-ENV JIRA_VERSION=8.3.2
+ENV JIRA_VERSION=8.4.0
 
 
 # JIRA_DOWNLOAD_URL:
