@@ -11,7 +11,7 @@ This image can be used to run a single / stand-alone  instance of Jira Software 
 The source-code in this repository is released under MIT License, but the actual docker container images (binaries) built by it are not. You are free to use this source-code to build your own Jira docker images and host them whereever you want. Please remember to consider various Atlassian and Oracle related lincense limitations when doing so.  
 
 ## Main features
-- Uses Fedora 29 as base image.
+- Uses Fedora 30 as base image.
 - Uses Atlassian Jira binary installer, which comes with Adopt JDK/JRE in the newer installers.
 - Exposes port 8080
 - Supports data center mode and self signed certs.
