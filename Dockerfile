@@ -1,4 +1,4 @@
-FROM fedora:29
+FROM fedora:30
 
 LABEL maintainer="kaz@praqma.net heh@praqma.net"
 
@@ -26,7 +26,7 @@ LABEL maintainer="kaz@praqma.net heh@praqma.net"
 # JIRA_VERSION:
 # ------------
 # The value for JIRA_VERSION should be a version number, which is part of the name of the jira software bin/tarball/zip.
-ENV JIRA_VERSION=8.4.0
+ENV JIRA_VERSION=8.5.1
 
 
 # JIRA_DOWNLOAD_URL:
