@@ -1,3 +1,24 @@
+# NOTICE OF DEPRECATION
+
+If you are not yet aware. Atlassian now provides Helm charts and images for the running of their Data Center products on Kubernetes.
+
+Therefore we will deprecate our implementation known as Atlassian Software in Kubernetes (ASK) as we believe that Atlassian is in the best position to provide a deployment model like this.
+
+Please see Atlassian's documentation for running Data Center products on Kubernetes.
+
+- [Documentation](https://atlassian.github.io/data-center-helm-charts/)
+- [Github repo](https://github.com/atlassian/data-center-helm-charts)
+
+This means we will no longer update or maintain ASK repositories nor push new images to Docker Hub. 
+
+You are therefor encouraged to push any images you presently use to a registry of your choice and clone/fork this repository if needed.
+
+Other repositories affected by this are:
+
+- https://github.com/Praqma/ask - Helm Chart (ASK)
+- https://github.com/Praqma/confluence - Confluence docker image (ASK)
+- https://github.com/Praqma/bitbucket - Bitbucket docker image (ASK)
+
 # Atlassian Software in Kubernetes (ASK) - Jira
 
 ![ASK-Logo](images/ask-logo.png)
